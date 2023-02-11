@@ -39,7 +39,10 @@ app.get("/", (req, res) => {
         console.log(doc.id, "=>", doc.data());
         arr.push(doc.data());
       });
-      res.send(arr);
+      const jsonObject = {
+        data: arr,
+      };
+      res.send(JSON.stringify(jsonObject));
     });
 });
 
