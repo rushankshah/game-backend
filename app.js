@@ -1,5 +1,5 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("./cs-526-team-undecided-firebase-adminsdk-9dgr5-3b2075b0ef.json");
+const serviceAccount = require("./gamedev-backend-firebase-adminsdk-t9rqe-89e88ede55.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
@@ -7,7 +7,7 @@ const db = admin.firestore();
 const express = require("express");
 const app = express();
 app.use(express.json());
-const port = 3000;
+const port = process.env.PORT || 2000;
 
 function getDateAndTime() {
   var today = new Date();
@@ -30,33 +30,25 @@ app.post("/", (req, res) => {
   res.send("Successfully written to database!");
 });
 
-app.get("/", (req, res) => {
-  db.collection("players-data")
-    .get()
-    .then((snapshot) => {
-      var arr = [];
-      snapshot.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data());
-        arr.push(doc.data());
-      });
-      const jsonObject = {
-        data: arr,
-      };
-      res.send(JSON.stringify(jsonObject));
+app.get("/", async (req, res) => {
+  try {
+    var snapshot = await db.collection("players-data").get();
+    var arr = [];
+    snapshot.forEach((doc) => {
+      console.log(doc.id, "=>", doc.data());
+      arr.push(doc.data());
     });
+    const jsonObject = {
+      data: arr,
+    };
+    res.status(200).json(jsonObject);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server is running on port ${port}`);
 });
-
-// db.collection("users")
-//   .doc("test")
-//   .set({
-//     first: "Ada",
-//     last: "Lovelace",
-//     born: 1815,
-//   })
-//   .then(() => {
-//     console.log("Document successfully written!");
-//   });
