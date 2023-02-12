@@ -20,10 +20,10 @@ function getDateAndTime() {
 }
 
 app.post("/", (req, res) => {
-  const { score, time } = req.body;
+  const { score, time, causeOfDeath } = req.body;
   db.collection("players-data")
     .doc(getDateAndTime())
-    .set({ score, time })
+    .set({ score, time, causeOfDeath })
     .then(() => {
       console.log("Document successfully written!");
     });
