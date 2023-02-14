@@ -20,14 +20,20 @@ function getDateAndTime() {
 }
 
 app.post("/", (req, res) => {
-  const { score, time, causeOfDeath } = req.body;
-  db.collection("players-data")
-    .doc(getDateAndTime())
-    .set({ score, time, causeOfDeath })
-    .then(() => {
-      console.log("Document successfully written!");
+  try {
+    const { score, time, causeOfDeath } = req.body;
+    db.collection("players-data")
+      .doc(getDateAndTime())
+      .set({ score, time, causeOfDeath })
+      .then(() => {
+        console.log("Document successfully written!");
+      });
+    res.send("Successfully written to database!");
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
     });
-  res.send("Successfully written to database!");
+  }
 });
 
 app.get("/", async (req, res) => {
