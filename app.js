@@ -6,7 +6,9 @@ admin.initializeApp({
 const db = admin.firestore();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 app.use(express.json());
+app.use(cors());
 const port = process.env.PORT || 2000;
 
 function getDateAndTime() {
