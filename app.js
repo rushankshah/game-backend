@@ -28,7 +28,8 @@ app.post("/", (req, res) => {
       .then(() => {
         console.log("Document successfully written!");
       });
-    res.send("Successfully written to database!");
+    const op = { success: "Successfully written to database!" };
+    res.status(200).json(op);
   } catch (error) {
     res.status(400).json({
       message: error.message,
