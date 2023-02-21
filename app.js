@@ -41,10 +41,10 @@ app.post("/endless", (req, res) => {
 
 app.post("/level2", (req, res) => {
   try {
-    const { score, time, causeOfDeath, bulletsFired, bulletsHit } = req.body;
+    const { score, time, causeOfDeath, bulletsFired, bulletHit } = req.body;
     db.collection("level2")
       .doc(getDateAndTime())
-      .set({ score, time, causeOfDeath, bulletsFired, bulletsHit })
+      .set({ score, time, causeOfDeath, bulletsFired, bulletHit })
       .then(() => {
         console.log("Document successfully written!");
       });
