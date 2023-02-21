@@ -131,6 +131,19 @@ app.get("/level2", async (req, res) => {
   }
 });
 
+app.get("/", async (req, res) => {
+  try {
+    var jsonObject = {
+      message: "Welcome to the backend of the game!",
+    };
+    res.status(200).json(jsonObject);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
