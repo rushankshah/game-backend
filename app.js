@@ -136,6 +136,7 @@ app.get("/", async (req, res) => {
     var jsonObject = {
       message: "Welcome to the backend of the game!",
     };
+    console.log("Welcome to the backend of the game! (Base URL hit)");
     res.status(200).json(jsonObject);
   } catch (error) {
     res.status(400).json({
