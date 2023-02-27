@@ -42,7 +42,7 @@ app.post("/endless", (req, res) => {
 app.post("/tutorial", (req, res) => {
   try {
     const { score, time, causeOfDeath } = req.body;
-    db.collection("endless")
+    db.collection("tutorial")
       .doc(getDateAndTime())
       .set({ score, time, causeOfDeath })
       .then(() => {
@@ -128,7 +128,7 @@ app.get("/endless", async (req, res) => {
 
 app.get("/tutorial", async (req, res) => {
   try {
-    var snapshot = await db.collection("endless").get();
+    var snapshot = await db.collection("tutorial").get();
     var arr = [];
     snapshot.forEach((doc) => {
       console.log(doc.id, "=>", doc.data());
