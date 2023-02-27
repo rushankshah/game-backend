@@ -39,6 +39,24 @@ app.post("/endless", (req, res) => {
   }
 });
 
+app.post("/tutorial", (req, res) => {
+  try {
+    const { score, time, causeOfDeath } = req.body;
+    db.collection("endless")
+      .doc(getDateAndTime())
+      .set({ score, time, causeOfDeath })
+      .then(() => {
+        console.log("Document successfully written!");
+      });
+    const op = { success: "Successfully written to database!" };
+    res.status(200).json(op);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+});
+
 app.post("/level2", (req, res) => {
   try {
     const {
@@ -107,6 +125,26 @@ app.get("/endless", async (req, res) => {
     });
   }
 });
+
+app.get("/tutorial", async (req, res) => {
+  try {
+    var snapshot = await db.collection("endless").get();
+    var arr = [];
+    snapshot.forEach((doc) => {
+      console.log(doc.id, "=>", doc.data());
+      arr.push(doc.data());
+    });
+    const jsonObject = {
+      data: arr,
+    };
+    res.status(200).json(jsonObject);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+});
+
 app.get("/level1", async (req, res) => {
   try {
     var snapshot = await db.collection("level1").get();
