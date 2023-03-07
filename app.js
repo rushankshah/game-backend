@@ -375,10 +375,10 @@ app.get("/level4lost", async (req, res) => {
 
 app.post("/level4won", (req, res) => {
   try {
-    const { time, causeOfWin, killedEnemy, numberOfSpikes } = req.body;
+    const { time, causeOfKillingEnemy, killedEnemy, numberOfSpikes } = req.body;
     db.collection("level4won")
       .doc(getDateAndTime())
-      .set({ time, causeOfWin, killedEnemy, numberOfSpikes })
+      .set({ time, causeOfKillingEnemy, killedEnemy, numberOfSpikes })
       .then(() => {
         console.log("Document successfully written!");
       });
@@ -445,10 +445,22 @@ app.get("/level5lost", async (req, res) => {
 
 app.post("/level5won", (req, res) => {
   try {
-    const { time, causeOfWin, killedEnemy, numberOfSpikes } = req.body;
+    const {
+      time,
+      causeOfKillingEnemy1,
+      causeOfKillingEnemy2,
+      killedEnemy,
+      numberOfSpikes,
+    } = req.body;
     db.collection("level5won")
       .doc(getDateAndTime())
-      .set({ time, causeOfWin, killedEnemy, numberOfSpikes })
+      .set({
+        time,
+        causeOfKillingEnemy1,
+        causeOfKillingEnemy2,
+        killedEnemy,
+        numberOfSpikes,
+      })
       .then(() => {
         console.log("Document successfully written!");
       });
