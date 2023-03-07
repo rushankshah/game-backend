@@ -9,7 +9,7 @@ const app = express();
 const cors = require("cors");
 app.use(express.json());
 app.use(cors());
-const port = process.env.PORT || 2000;
+const port = process.env.PORT || 4000;
 
 function getDateAndTime() {
   var today = new Date();
@@ -42,11 +42,14 @@ function getDateAndTime() {
 app.post("/mainmenu", async (req, res) => {
   try {
     const { level } = req.body;
+    // console.log("Hi");
     var count = 0;
     var snapshot = await db.collection("mainmenu").get();
+    // console.log(snapshot);
     snapshot.forEach((doc) => {
+      console.log(doc.data().count);
       if (doc.id == level) {
-        count = doc.data();
+        count = doc.data().count;
       }
     });
     count += 1;
@@ -106,7 +109,7 @@ app.post("/retries", async (req, res) => {
     var snapshot = await db.collection("retries").get();
     snapshot.forEach((doc) => {
       if (doc.id == level) {
-        count = doc.data();
+        count = doc.data().count;
       }
     });
     count += 1;
