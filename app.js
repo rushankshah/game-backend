@@ -270,10 +270,10 @@ app.get("/level2won", async (req, res) => {
 
 app.post("/level3lost", (req, res) => {
   try {
-    const { time, numberOfSpikes } = req.body;
+    const { time, causeOfDeath, numberOfSpikes } = req.body;
     db.collection("level3lost")
       .doc(getDateAndTime())
-      .set({ time, numberOfSpikes })
+      .set({ time, causeOfDeath, numberOfSpikes })
       .then(() => {
         console.log("Document successfully written!");
       });
