@@ -42,7 +42,7 @@ function getDateAndTime() {
 app.post("/mainmenu", async (req, res) => {
   try {
     const { level } = req.body;
-    const count = 0;
+    var count = 0;
     var snapshot = await db.collection("mainmenu").get();
     snapshot.forEach((doc) => {
       if (doc.id == level) {
@@ -102,7 +102,7 @@ app.get("/retries", async (req, res) => {
 app.post("/retries", async (req, res) => {
   try {
     const { level } = req.body;
-    const count = 0;
+    var count = 0;
     var snapshot = await db.collection("retries").get();
     snapshot.forEach((doc) => {
       if (doc.id == level) {
