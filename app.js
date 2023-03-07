@@ -449,7 +449,8 @@ app.post("/level5won", (req, res) => {
       time,
       causeOfKillingEnemy1,
       causeOfKillingEnemy2,
-      killedEnemy,
+      killedEnemy1,
+      killedEnemy2,
       numberOfSpikes,
     } = req.body;
     db.collection("level5won")
@@ -458,7 +459,8 @@ app.post("/level5won", (req, res) => {
         time,
         causeOfKillingEnemy1,
         causeOfKillingEnemy2,
-        killedEnemy,
+        killedEnemy1,
+        killedEnemy2,
         numberOfSpikes,
       })
       .then(() => {
